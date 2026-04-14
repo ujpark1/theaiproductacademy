@@ -1,0 +1,19 @@
+{
+  "builds": [
+    {
+      "src": "api/*.js",
+      "use": "@vercel/node@3.2.0",
+      "config": { "nodeVersion": "20.x" }
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/api/subscribe", "dest": "/api/subscribe.js" },
+    { "src": "/api/cal-webhook", "dest": "/api/cal-webhook.js" },
+    { "src": "/teens-seminar", "dest": "/index.html" },
+    { "src": "/", "dest": "/index.html" }
+  ]
+}
