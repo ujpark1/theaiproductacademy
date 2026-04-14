@@ -233,7 +233,7 @@
     .process-step p { font-size: 14px; color: var(--text-muted); }
 
     /* ── Founder ── */
-    .founder-card {
+    .founder-section-highlight { background: linear-gradient(135deg, rgba(14,165,233,0.04), rgba(79,70,229,0.04)); border-top: 3px solid var(--teal); border-bottom: 3px solid var(--indigo); padding: 72px 0; } .founder-card {
       display: flex;
       gap: 24px;
       align-items: flex-start;
@@ -242,7 +242,7 @@
       border-radius: 16px;
       padding: 32px;
     }
-    .founder-avatar {
+    .founder-avatar-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 3px solid var(--teal); } .founder-avatar {
       width: 80px;
       height: 80px;
       border-radius: 50%;
@@ -313,7 +313,7 @@
     /* ── Responsive ── */
     @media (max-width: 640px) {
       .hero { padding: 48px 20px 40px; }
-      .founder-card { flex-direction: column; align-items: center; text-align: center; }
+      .founder-section-highlight { background: linear-gradient(135deg, rgba(14,165,233,0.04), rgba(79,70,229,0.04)); border-top: 3px solid var(--teal); border-bottom: 3px solid var(--indigo); padding: 72px 0; } .founder-card { flex-direction: column; align-items: center; text-align: center; }
       .founder-badges { justify-content: center; }
       section { padding: 48px 0; }
     }
@@ -367,13 +367,13 @@
 </section>
 
 <!-- ── Why Started ── -->
-<section id="why">
+<section id="why" class="founder-section-highlight">
   <div class="container">
     <div class="section-label">The Origin Story</div>
     <h2 class="section-title">Why I Started AI Product Academy</h2>
 
     <div class="founder-card" style="margin-bottom: 32px;">
-      <div class="founder-avatar">EP</div>
+      <img src="/eric-park.png" alt="Eric Park" class="founder-avatar-img">
       <div class="founder-info">
         <h4>Eric Park</h4>
         <div class="founder-role">Founder, AI Product Academy</div>
@@ -381,7 +381,7 @@
         <div class="founder-badges">
           <span class="founder-badge">15+ Years in Tech</span>
           <span class="founder-badge">2x Amazon Bestselling Author</span>
-          <span class="founder-badge">Product Design Leader</span>
+          <span class="founder-badge">Product Leader</span>
         </div>
       </div>
     </div>
