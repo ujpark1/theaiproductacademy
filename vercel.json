@@ -13,7 +13,8 @@
   "routes": [
     { "src": "/api/subscribe", "dest": "/api/subscribe.js" },
     { "src": "/api/cal-webhook", "dest": "/api/cal-webhook.js" },
-    { "src": "/teens-seminar", "dest": "/index.html" },
+    { "src": "/parent-seminar-for-teens", "dest": "/parent-seminar-for-teens.html" },
+    { "src": "/(.*)\\.html", "dest": "/$1.html" },
     { "src": "/", "dest": "/index.html" }
   ]
 }
