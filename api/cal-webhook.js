@@ -11,7 +11,6 @@ export default async function handler(req, res) {
   try {
     const payload = req.body?.payload || req.body;
 
-    // Cal.com BOOKING_CREATED payload structure
     const attendee = payload?.attendees?.[0];
     if (!attendee?.email) {
       return res.status(200).json({ skipped: true, reason: 'No attendee email' });
@@ -23,22 +22,34 @@ export default async function handler(req, res) {
     const firstName = nameParts[0] || '';
     const lastName = nameParts.slice(1).join(' ') || '';
 
-    // Extract booking details
     const startTime = payload?.startTime || '';
     const eventTitle = payload?.title || '';
     const eventSlug = payload?.eventType?.slug || payload?.type?.slug || '';
 
-    // Determine product & list based on event
+    // Determine Kids vs Teens
     const isKids = eventTitle.toLowerCase().includes('kids') ||
                    eventSlug.toLowerCase().includes('kids');
     const product = isKids ? 'kids-seminar' : 'teens-seminar';
     const listId = isKids
       ? parseInt(process.env.BREVO_LIST_ID_KIDS || '4')
       : parseInt(process.env.BREVO_LIST_ID_TEENS || '3');
-    const welcomeTemplateId = isKids ? 2 : 1;
+
+    // Template IDs: Welcome(1,2), Reminder(3,4), FollowUp(5,6)
+    const templates = isKids
+      ? { welcome: 2, reminder: 4, followUp: 6 }
+      : { welcome: 1, reminder: 3, followUp: 5 };
+
+    // Format session date for display
+    const sessionDate = startTime ? new Date(startTime) : null;
+    const formattedSession = sessionDate
+      ? sessionDate.toLocaleString('en-US', {
+          weekday: 'long', month: 'long', day: 'numeric',
+          hour: 'numeric', minute: '2-digit', timeZoneName: 'short',
+        })
+      : 'TBD';
 
     // 1. Add contact to Brevo list
-    const brevoRes = await fetch('https://api.brevo.com/v3/contacts', {
+    await fetch('https://api.brevo.com/v3/contacts', {
       method: 'POST',
       headers: {
         'accept': 'application/json',
@@ -50,7 +61,7 @@ export default async function handler(req, res) {
         attributes: {
           FIRSTNAME: firstName,
           LASTNAME: lastName,
-          SEMINAR_SESSION: startTime,
+          SEMINAR_SESSION: formattedSession,
           SEMINAR_TITLE: eventTitle,
           PRODUCT: product,
           SOURCE: 'cal.com',
@@ -61,35 +72,73 @@ export default async function handler(req, res) {
     });
 
     // 2. Send Welcome email immediately
-    const emailRes = await fetch('https://api.brevo.com/v3/smtp/email', {
-      method: 'POST',
-      headers: {
-        'accept': 'application/json',
-        'content-type': 'application/json',
-        'api-key': brevoKey,
-      },
-      body: JSON.stringify({
-        templateId: welcomeTemplateId,
-        to: [{ email, name }],
-        params: {
-          FIRSTNAME: firstName,
-          SEMINAR_SESSION: startTime,
-        },
-      }),
+    await sendTemplate(brevoKey, templates.welcome, email, name, {
+      FIRSTNAME: firstName,
+      SEMINAR_SESSION: formattedSession,
     });
 
-    const emailData = await emailRes.json().catch(() => ({}));
+    // 3. Schedule Reminder (1 day before seminar)
+    if (sessionDate) {
+      const reminderDate = new Date(sessionDate);
+      reminderDate.setDate(reminderDate.getDate() - 1);
+      reminderDate.setHours(9, 0, 0, 0); // 9 AM day before
+
+      const now = new Date();
+      if (reminderDate > now) {
+        await sendTemplate(brevoKey, templates.reminder, email, name, {
+          FIRSTNAME: firstName,
+          SEMINAR_SESSION: formattedSession,
+        }, reminderDate.toISOString());
+      }
+    }
+
+    // 4. Schedule Follow-up (1 day after seminar)
+    if (sessionDate) {
+      const followUpDate = new Date(sessionDate);
+      followUpDate.setDate(followUpDate.getDate() + 1);
+      followUpDate.setHours(10, 0, 0, 0); // 10 AM day after
+
+      await sendTemplate(brevoKey, templates.followUp, email, name, {
+        FIRSTNAME: firstName,
+        SEMINAR_SESSION: formattedSession,
+      }, followUpDate.toISOString());
+    }
 
     return res.status(200).json({
       success: true,
       contact: email,
       product,
       listId,
-      welcomeEmailSent: emailRes.status === 201,
-      brevoStatus: brevoRes.status,
+      emailsScheduled: {
+        welcome: 'sent',
+        reminder: sessionDate ? 'scheduled' : 'skipped',
+        followUp: sessionDate ? 'scheduled' : 'skipped',
+      },
     });
   } catch (err) {
     console.error('Cal webhook error:', err);
     return res.status(200).json({ error: err.message });
   }
+}
+
+async function sendTemplate(apiKey, templateId, toEmail, toName, params, scheduledAt) {
+  const body = {
+    templateId,
+    to: [{ email: toEmail, name: toName }],
+    params,
+  };
+
+  if (scheduledAt) {
+    body.scheduledAt = scheduledAt;
+  }
+
+  return fetch('https://api.brevo.com/v3/smtp/email', {
+    method: 'POST',
+    headers: {
+      'accept': 'application/json',
+      'content-type': 'application/json',
+      'api-key': apiKey,
+    },
+    body: JSON.stringify(body),
+  });
 }
