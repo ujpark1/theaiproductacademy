@@ -19,6 +19,8 @@
     { "src": "/api/cal-webhook", "dest": "/api/cal-webhook.js" },
     { "src": "/parent-seminar-for-teens", "dest": "/parent-seminar-for-teens.html" },
     { "src": "/eric-park.png", "dest": "/eric-park.png" },
+    { "src": "/speaking-nyc.png", "dest": "/speaking-nyc.png" },
+    { "src": "/workshop.png", "dest": "/workshop.png" },
     { "src": "/(.*)\\.html", "dest": "/$1.html" },
     { "src": "/", "dest": "/index.html" }
   ]

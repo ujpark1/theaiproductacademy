@@ -257,7 +257,11 @@
       border-radius: 16px;
       padding: 32px;
     }
-    .founder-avatar-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 3px solid var(--teal); } .founder-avatar {
+    .founder-avatar-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 3px solid var(--teal); }
+    .founder-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+    .founder-photos img { width: 100%; border-radius: 10px; object-fit: cover; aspect-ratio: 4/3; }
+    .founder-photos figcaption { font-size: 13px; color: var(--text-muted); margin-top: 6px; text-align: center; font-style: italic; }
+    .founder-photos figure { margin: 0; } .founder-avatar {
       width: 80px;
       height: 80px;
       border-radius: 50%;
@@ -513,19 +517,29 @@
 <section>
   <div class="container">
     <div class="section-label">Your Host</div>
-    <h2 class="section-title">Meet Eric Park</h2>
+    <h2 class="section-title">Meet Uijun Park</h2>
 
     <div class="founder-card">
-      <img src="/eric-park.png" alt="Eric Park" class="founder-avatar-img">
+      <img src="/eric-park.png" alt="Uijun Park" class="founder-avatar-img">
       <div class="founder-info">
-        <h4>Eric Park</h4>
+        <h4>Uijun Park</h4>
         <div class="founder-role">Founder, AI Product Academy</div>
-        <p>With 15+ years in the tech industry, Eric has led product design at companies used by millions. He's the author of two Amazon bestselling books in the UX/App category.</p>
+        <p>With 15+ years in the tech industry, Uijun has led product design at companies used by millions. He's the author of two Amazon bestselling books in the UX/App category.</p>
         <p style="margin-top: 8px;">After watching his own daughter build a real app using AI &mdash; with no coding experience &mdash; he realized this is the education every teen deserves. Schools aren't teaching it. So he built AI Product Academy to bridge that gap.</p>
         <div class="founder-badges">
           <span class="founder-badge">15+ Years in Tech</span>
           <span class="founder-badge">2x Amazon Bestselling Author</span>
           <span class="founder-badge">Product/Design Lead</span>
+        </div>
+        <div class="founder-photos">
+          <figure>
+            <img src="/speaking-nyc.png" alt="Uijun Park speaking at a tech event in New York City">
+            <figcaption>Speaking at a tech event in NYC</figcaption>
+          </figure>
+          <figure>
+            <img src="/workshop.png" alt="Uijun Park leading a product workshop">
+            <figcaption>Leading a product design workshop</figcaption>
+          </figure>
         </div>
       </div>
     </div>
