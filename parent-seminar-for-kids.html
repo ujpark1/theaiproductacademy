@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Seminar: Turning Screen Time Into Creative Power | AI Product Academy</title>
+  <meta name="description" content="Your child spends hours on screens. What if that time became creative? Discover how kids ages 8–12 can build real apps with AI. Free live seminar for parents.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --orange: #FF6B35;
+      --purple: #7C3AED;
+      --sky: #38BDF8;
+      --green: #22C55E;
+      --yellow: #FACC15;
+      --carbon: #1E293B;
+      --bg: #FFFBF7;
+      --surface: #FFFFFF;
+      --surface-alt: #FFF7F0;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --border: #F0E4D8;
+      --gradient: linear-gradient(135deg, var(--orange), var(--purple));
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Nunito', sans-serif; line-height: 1.2; }
+
+    .container { max-width: 840px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Top Bar ── */
+    .topbar {
+      background: var(--carbon);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .topbar span { color: var(--yellow); }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 72px 24px 56px;
+      text-align: center;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(255,107,53,0.12), rgba(124,58,237,0.12));
+      color: var(--purple);
+      padding: 6px 16px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: var(--carbon);
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 32px;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--gradient);
+      color: #fff;
+      padding: 16px 36px;
+      border-radius: 14px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(255,107,53,0.3);
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,107,53,0.4);
+    }
+    .hero-sub {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ── Sections ── */
+    section { padding: 64px 0; }
+    section:nth-child(even) { background: var(--surface); }
+
+    .section-label {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(255,107,53,0.12), rgba(124,58,237,0.12));
+      color: var(--purple);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(24px, 4vw, 32px);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      max-width: 600px;
+    }
+
+    /* ── Problem Section (warm dark) ── */
+    .problem-section {
+      background: #2D1B0E;
+      padding: 72px 0;
+    }
+    .problem-section .section-label {
+      background: rgba(255,107,53,0.2);
+      color: #FDBA74;
+    }
+    .problem-section .section-title {
+      color: #FFF7ED;
+    }
+    .problem-section .section-title em {
+      font-style: normal;
+      color: var(--orange);
+    }
+    .problem-section .section-desc {
+      color: #C4A882;
+    }
+    .problem-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .problem-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .problem-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      background: rgba(255,107,53,0.2);
+    }
+    .problem-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #FFF7ED;
+    }
+    .problem-card p {
+      font-size: 16px;
+      color: #C4A882;
+      line-height: 1.5;
+    }
+    .news-headlines {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .news-headlines img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .news-headlines figure { margin: 0; }
+
+    /* ── Answer Section ── */
+    .answer-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .answer-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      background: rgba(255,107,53,0.1);
+    }
+    .answer-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .answer-card p {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    /* ── Seminar Topics ── */
+    .topics-list {
+      display: grid;
+      gap: 16px;
+    }
+    .topic-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .topic-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--gradient);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .topic-item h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .topic-item p {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    /* ── Story ── */
+    .story-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+    }
+    .story-block::before {
+      content: '\201C';
+      position: absolute;
+      top: 16px;
+      left: 24px;
+      font-size: 64px;
+      font-family: 'Nunito', sans-serif;
+      color: var(--orange);
+      opacity: 0.2;
+      line-height: 1;
+    }
+    .story-block p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .story-block p:last-of-type { margin-bottom: 0; }
+    .story-highlight {
+      background: linear-gradient(135deg, rgba(255,107,53,0.08), rgba(124,58,237,0.08));
+      border-left: 3px solid var(--orange);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-weight: 500;
+    }
+
+    /* ── Founder ── */
+    .founder-card {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    .founder-avatar-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 3px solid var(--orange);
+    }
+    .founder-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .founder-photos img {
+      width: 100%;
+      border-radius: 16px;
+      object-fit: cover;
+      aspect-ratio: 4/3;
+    }
+    .founder-photos figcaption {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      text-align: center;
+      font-style: italic;
+    }
+    .founder-photos figure { margin: 0; }
+    .founder-info h4 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+    .founder-role {
+      font-size: 16px;
+      color: var(--orange);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .founder-info p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .founder-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .founder-badge {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255,107,53,0.1);
+      color: var(--orange);
+    }
+
+    /* ── Registration Form ── */
+    .form-section {
+      padding: 72px 0;
+      background: linear-gradient(180deg, var(--surface-alt) 0%, var(--bg) 100%);
+    }
+    .form-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 32px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    }
+    .form-wrapper h2 {
+      font-size: 28px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .form-wrapper > p {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      font-size: 15px;
+    }
+
+    /* Cal.com embed container */
+    #cal-embed {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .form-note {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .hero { padding: 48px 20px 40px; }
+      .founder-card { flex-direction: column; align-items: center; text-align: center; }
+      .founder-badges { justify-content: center; }
+      .form-wrapper { padding: 28px 20px; }
+      section { padding: 48px 0; }
+      .news-headlines { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Top Bar ── -->
+<div class="topbar">
+  <span>FREE LIVE SEMINAR</span> &mdash; Limited seats available. Reserve yours today.
+</div>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-badge">Free Parent Seminar</div>
+    <h1>What If Your Child Could<br><em>Build</em> Instead of Just <em>Scroll?</em></h1>
+    <p>Kids spend hours on screens every day. What if that time became creative, productive, and genuinely exciting? Discover how children ages 8&ndash;12 can build real apps with AI.</p>
+    <a href="#register" class="hero-cta">Reserve Your Free Seat &rarr;</a>
+    <div class="hero-sub">45 minutes &middot; Live &middot; Free &middot; For parents of kids (8&ndash;12)</div>
+  </div>
+</div>
+
+<!-- ── Problem ── -->
+<section class="problem-section">
+  <div class="container">
+    <div class="section-label">The Concern</div>
+    <h2 class="section-title">Screen Time Is Growing.<br><em>Creative Time Isn't.</em></h2>
+    <p class="section-desc">Most kids are consuming technology. Very few are learning to create with it.</p>
+
+    <div class="news-headlines">
+      <figure>
+        <img src="/news-ai-jobs.png" alt="AI is reshaping every industry">
+      </figure>
+      <figure>
+        <img src="/news-underemployment.png" alt="The future demands new skills">
+      </figure>
+    </div>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">&#x1F4F1;</div>
+        <div>
+          <h4>Kids average 5+ hours of daily screen time</h4>
+          <p>Most of that time is passive &mdash; watching videos, playing games, scrolling feeds. What if even a fraction became creative and productive?</p>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">&#x1F3EB;</div>
+        <div>
+          <h4>Schools focus on memorization, not making</h4>
+          <p>Tests measure what kids can recall. But the future rewards those who can think creatively, solve real problems, and build things from scratch.</p>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">&#x1F9E9;</div>
+        <div>
+          <h4>Creativity fades without practice</h4>
+          <p>Research shows creative confidence peaks in childhood &mdash; then drops sharply. Kids who learn to build and create early carry that confidence for life.</p>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">&#x1F680;</div>
+        <div>
+          <h4>AI is changing everything &mdash; and kids can be part of it</h4>
+          <p>AI isn't just for adults and engineers. Today's tools make it possible for an 8-year-old to go from idea to working app. The question is: will your child be a creator or just a consumer?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Why AI Product Building ── -->
+<section>
+  <div class="container">
+    <div class="section-label">The Answer</div>
+    <h2 class="section-title">What Is AI Product Building &mdash;<br>And Why Start at Age 8?</h2>
+
+    <div class="answer-intro" style="font-size: 17px; line-height: 1.8; color: var(--text); margin-bottom: 36px;">
+      <p style="margin-bottom: 16px;">AI Product Building is the skill of <strong>discovering real problems, imagining solutions, building apps, and sharing them with real people.</strong> It's about turning curiosity into creation.</p>
+      <p style="margin-bottom: 16px;">At the heart of this process is <strong>Design Thinking</strong> &mdash; a creative, human-centered approach used by the world's best inventors and product teams. And it's something kids are naturally good at.</p>
+      <div style="background: linear-gradient(135deg, rgba(255,107,53,0.08), rgba(124,58,237,0.08)); border-left: 3px solid var(--orange); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 20px 0; font-size: 15px; color: var(--text-muted);">
+        Fun fact: Uijun's Amazon bestselling book is titled <strong style="color: var(--text);">&ldquo;Design Thinking.&rdquo;</strong> He's spent 15+ years mastering this process &mdash; and now he's making it accessible to kids.
+      </div>
+    </div>
+
+    <div class="problem-grid">
+      <div class="answer-card">
+        <div class="answer-icon">&#x1F9E0;</div>
+        <div>
+          <h4>AI handles the technical stuff. Kids focus on ideas.</h4>
+          <p>AI can write code and generate images. But it can't decide what to build or why it matters. That's where your child's imagination comes in &mdash; and that's the skill that will matter most.</p>
+        </div>
+      </div>
+      <div class="answer-card">
+        <div class="answer-icon">&#x2728;</div>
+        <div>
+          <h4>No coding experience needed. Really.</h4>
+          <p>AI tools have made it possible for anyone &mdash; including 8-year-olds &mdash; to build real, working apps. No coding classes, no complex syntax. Just ideas and a structured process to bring them to life.</p>
+        </div>
+      </div>
+      <div class="answer-card">
+        <div class="answer-icon">&#x1F3A8;</div>
+        <div>
+          <h4>It's creative, not academic. Kids love it.</h4>
+          <p>This isn't homework. It's closer to art class meets invention workshop. Kids pick problems they care about, sketch solutions, and build something they're proud to show friends and family.</p>
+        </div>
+      </div>
+      <div class="answer-card">
+        <div class="answer-icon">&#x1F331;</div>
+        <div>
+          <h4>Early builders become confident thinkers.</h4>
+          <p>When a child builds something real and sees people use it, something shifts. They start seeing themselves as creators, not just students. That confidence stays with them through middle school, high school, and beyond.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── What You'll Learn ── -->
+<section>
+  <div class="container">
+    <div class="section-label">What You'll Learn</div>
+    <h2 class="section-title">In This Free 45-Minute Seminar</h2>
+    <p class="section-desc">A fun, clear look at what's possible &mdash; and how your child can start building.</p>
+
+    <div class="topics-list">
+      <div class="topic-item">
+        <div class="topic-num">1</div>
+        <div>
+          <h4>Why AI Changes Everything for Kids</h4>
+          <p>See how AI tools are making it possible for children &mdash; not just adults &mdash; to build real products. The playing field has never been more level.</p>
+        </div>
+      </div>
+      <div class="topic-item">
+        <div class="topic-num">2</div>
+        <div>
+          <h4>From Consumer to Creator: The Mindset Shift</h4>
+          <p>The difference between a child who scrolls and a child who builds isn't talent &mdash; it's exposure. We'll show you how to spark that shift.</p>
+        </div>
+      </div>
+      <div class="topic-item">
+        <div class="topic-num">3</div>
+        <div>
+          <h4>Design Thinking for Kids: How It Works</h4>
+          <p>A step-by-step look at how kids learn to find problems, brainstorm solutions, and build apps &mdash; using the same process top companies use.</p>
+        </div>
+      </div>
+      <div class="topic-item">
+        <div class="topic-num">4</div>
+        <div>
+          <h4>Real Examples of What Kids Have Built</h4>
+          <p>See actual apps created by kids in our program &mdash; from homework helpers to family chore trackers. You'll be amazed at what's possible.</p>
+        </div>
+      </div>
+      <div class="topic-item">
+        <div class="topic-num">5</div>
+        <div>
+          <h4>Live Q&A: Your Questions Answered</h4>
+          <p>Ask anything about the program, your child's readiness, or how AI education works. We'll answer everything live.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Real Story ── -->
+<section>
+  <div class="container">
+    <div class="section-label">Real Story</div>
+    <h2 class="section-title">What Happens When a Kid<br>Learns to Build with AI</h2>
+
+    <div class="story-block">
+      <p>A 10-year-old noticed that her family always argued about whose turn it was to do chores. Instead of just complaining, she decided to fix it.</p>
+      <p>Using design thinking, she talked to her family members about what frustrated them. She researched chore apps &mdash; and realized none of them were fun enough for kids to actually want to use.</p>
+      <div class="story-highlight">
+        She built a family chore app where completing tasks earns stars and unlocks fun rewards. Using AI tools, she went from idea to a working app her whole family now uses every week.
+      </div>
+      <p>No coding classes. No computer science background. Just curiosity, a structured process, and AI tools that made building possible. <strong>This is what happens when kids learn to think like creators.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Founder ── -->
+<section>
+  <div class="container">
+    <div class="section-label">Your Host</div>
+    <h2 class="section-title">Meet Uijun Park</h2>
+
+    <div class="founder-card">
+      <img src="/eric-park.png" alt="Uijun Park" class="founder-avatar-img">
+      <div class="founder-info">
+        <h4>Uijun Park</h4>
+        <div class="founder-role">Founder, AI Product Academy</div>
+        <p>With 15+ years in the tech industry, Uijun has led product design at companies used by millions. He's the author of two Amazon bestselling books in the UX/App category.</p>
+        <p style="margin-top: 8px;">After watching kids light up when they realized they could build real apps &mdash; not just play them &mdash; he knew this was the kind of education that was missing. AI Product Academy was created to give every child the chance to become a creator.</p>
+        <div class="founder-badges">
+          <span class="founder-badge">15+ Years in Tech</span>
+          <span class="founder-badge">2x Amazon Bestselling Author</span>
+          <span class="founder-badge">Product/Design Lead</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="founder-photos">
+      <figure>
+        <img src="/speaking-nyc.png" alt="Uijun Park speaking at a tech event in New York City">
+        <figcaption>Speaking at a tech event in NYC</figcaption>
+      </figure>
+      <figure>
+        <img src="/workshop.png" alt="Uijun Park leading a product workshop">
+        <figcaption>Leading a product design workshop</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ── Registration Form ── -->
+<section class="form-section" id="register">
+  <div class="container">
+    <div class="form-wrapper">
+      <h2>Reserve Your Free Seat</h2>
+      <p>Choose a session that works for you. Spots are limited to keep it interactive.</p>
+
+      <!-- Cal.com Inline Embed -->
+      <div id="cal-embed" style="min-height: 600px; overflow: hidden;"></div>
+
+      <div class="form-note" style="margin-top: 16px;">100% free. No credit card required. You'll receive a video call link via email.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="container">
+    &copy; 2026 AI Product Academy. All rights reserved.
+  </div>
+</footer>
+
+<!-- Cal.com Embed Script -->
+<script>
+  // ============================================
+  // SETUP: Replace with Kids seminar Cal.com link
+  // ============================================
+  const CAL_LINK = "ai-product-academy/free-parent-seminar-ai-product-academy-for-kids";
+
+  (function (C, A, L) {
+    let p = function (a, ar) { a.q.push(ar); };
+    let d = C.document;
+    C.Cal = C.Cal || function () {
+      let cal = C.Cal;
+      let ar = arguments;
+      if (!cal.loaded) {
+        cal.ns = {};
+        cal.q = cal.q || [];
+        d.head.appendChild(d.createElement("script")).src = A;
+        cal.loaded = true;
+      }
+      if (ar[0] === L) {
+        const api = function () { p(api, arguments); };
+        const namespace = ar[1];
+        api.q = api.q || [];
+        if (typeof namespace === "string") {
+          cal.ns[namespace] = cal.ns[namespace] || api;
+          p(cal.ns[namespace], ar);
+          p(cal, ["initNamespace", namespace]);
+        } else {
+          p(cal, ar);
+        }
+        return;
+      }
+      p(cal, ar);
+    };
+  })(window, "https://app.cal.com/embed/embed.js", "init");
+
+  Cal("init", "kids-seminar", { origin: "https://cal.com" });
+
+  Cal.ns["kids-seminar"]("inline", {
+    elementOrSelector: "#cal-embed",
+    calLink: CAL_LINK,
+    layout: "month_view",
+    config: {
+      theme: "light",
+    },
+  });
+
+  Cal.ns["kids-seminar"]("ui", {
+    theme: "light",
+    styles: { branding: { brandColor: "#FF6B35" } },
+    hideEventTypeDetails: false,
+    layout: "month_view",
+  });
+
+  // Track successful booking for Meta Pixel
+  Cal.ns["kids-seminar"]("on", {
+    action: "bookingSuccessful",
+    callback: (e) => {
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead', {
+          content_name: 'kids-seminar',
+          content_category: 'seminar-registration',
+          value: 0,
+          currency: 'USD',
+        });
+      }
+    },
+  });
+</script>
+
+<!-- Meta Pixel (uncomment and replace YOUR_PIXEL_ID) -->
+<!--
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'YOUR_PIXEL_ID');
+  fbq('track', 'PageView');
+</script>
+-->
+
+</body>
+</html>

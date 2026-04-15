@@ -3,7 +3,9 @@
     {
       "src": "api/*.js",
       "use": "@vercel/node@3.2.0",
-      "config": { "nodeVersion": "20.x" }
+      "config": {
+        "nodeVersion": "20.x"
+      }
     },
     {
       "src": "*.html",
@@ -15,11 +17,33 @@
     }
   ],
   "routes": [
-    { "src": "/api/subscribe", "dest": "/api/subscribe.js" },
-    { "src": "/api/cal-webhook", "dest": "/api/cal-webhook.js" },
-    { "src": "/parent-seminar-for-teens", "dest": "/parent-seminar-for-teens.html" },
-    { "src": "/(.*)\\.png", "dest": "/$1.png" },
-    { "src": "/(.*)\\.html", "dest": "/$1.html" },
-    { "src": "/", "dest": "/index.html" }
+    {
+      "src": "/api/subscribe",
+      "dest": "/api/subscribe.js"
+    },
+    {
+      "src": "/api/cal-webhook",
+      "dest": "/api/cal-webhook.js"
+    },
+    {
+      "src": "/parent-seminar-for-teens",
+      "dest": "/parent-seminar-for-teens.html"
+    },
+    {
+      "src": "/parent-seminar-for-kids",
+      "dest": "/parent-seminar-for-kids.html"
+    },
+    {
+      "src": "/(.*)\\.png",
+      "dest": "/$1.png"
+    },
+    {
+      "src": "/(.*)\\.html",
+      "dest": "/$1.html"
+    },
+    {
+      "src": "/",
+      "dest": "/index.html"
+    }
   ]
 }

@@ -25,7 +25,16 @@ export default async function handler(req, res) {
 
     // Extract booking details
     const startTime = payload?.startTime || '';
-    const eventTitle = payload?.title || 'AI Product Academy Seminar';
+    const eventTitle = payload?.title || '';
+    const eventSlug = payload?.eventType?.slug || payload?.type?.slug || '';
+
+    // Determine product & list based on event
+    const isKids = eventTitle.toLowerCase().includes('kids') ||
+                   eventSlug.toLowerCase().includes('kids');
+    const product = isKids ? 'kids-seminar' : 'teens-seminar';
+    const listId = isKids
+      ? parseInt(process.env.BREVO_LIST_ID_KIDS || '4')
+      : parseInt(process.env.BREVO_LIST_ID_TEENS || '3');
 
     // Add contact to Brevo
     const brevoRes = await fetch('https://api.brevo.com/v3/contacts', {
@@ -42,10 +51,10 @@ export default async function handler(req, res) {
           LASTNAME: lastName,
           SEMINAR_SESSION: startTime,
           SEMINAR_TITLE: eventTitle,
-          PRODUCT: 'teens-seminar',
+          PRODUCT: product,
           SOURCE: 'cal.com',
         },
-        listIds: [parseInt(process.env.BREVO_LIST_ID_TEENS || '2')],
+        listIds: [listId],
         updateEnabled: true,
       }),
     });
@@ -55,6 +64,8 @@ export default async function handler(req, res) {
     return res.status(200).json({
       success: true,
       contact: email,
+      product,
+      listId,
       brevoStatus: brevoRes.status,
     });
   } catch (err) {
