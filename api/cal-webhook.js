@@ -34,10 +34,10 @@ export default async function handler(req, res) {
       ? parseInt(process.env.BREVO_LIST_ID_KIDS || '4')
       : parseInt(process.env.BREVO_LIST_ID_TEENS || '3');
 
-    // Template IDs: Welcome(1,2), Reminder(3,4), FollowUp(5,6)
+    // Template IDs: Welcome(1,2), Reminder(3,4), FollowUp(5,6), Benefits(7 teens-only)
     const templates = isKids
-      ? { welcome: 2, reminder: 4, followUp: 6 }
-      : { welcome: 1, reminder: 3, followUp: 5 };
+      ? { welcome: 2, reminder: 4, followUp: 6, benefits: null }
+      : { welcome: 1, reminder: 3, followUp: 5, benefits: 7 };
 
     // Format session date for display
     const sessionDate = startTime ? new Date(startTime) : null;
@@ -77,7 +77,18 @@ export default async function handler(req, res) {
       SEMINAR_SESSION: formattedSession,
     });
 
-    // 3. Schedule Reminder (1 day before seminar)
+    // 3. Schedule Benefits email (1 hour after welcome, Teens only)
+    if (templates.benefits) {
+      const benefitsDate = new Date();
+      benefitsDate.setHours(benefitsDate.getHours() + 1);
+
+      await sendTemplate(brevoKey, templates.benefits, email, name, {
+        FIRSTNAME: firstName,
+        SEMINAR_SESSION: formattedSession,
+      }, benefitsDate.toISOString());
+    }
+
+    // 4. Schedule Reminder (1 day before seminar)
     if (sessionDate) {
       const reminderDate = new Date(sessionDate);
       reminderDate.setDate(reminderDate.getDate() - 1);
@@ -92,7 +103,7 @@ export default async function handler(req, res) {
       }
     }
 
-    // 4. Schedule Follow-up (1 day after seminar)
+    // 5. Schedule Follow-up (1 day after seminar)
     if (sessionDate) {
       const followUpDate = new Date(sessionDate);
       followUpDate.setDate(followUpDate.getDate() + 1);
@@ -111,6 +122,7 @@ export default async function handler(req, res) {
       listId,
       emailsScheduled: {
         welcome: 'sent',
+        benefits: templates.benefits ? 'scheduled (1hr)' : 'skipped',
         reminder: sessionDate ? 'scheduled' : 'skipped',
         followUp: sessionDate ? 'scheduled' : 'skipped',
       },
