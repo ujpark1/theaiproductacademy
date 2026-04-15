@@ -35,8 +35,9 @@ export default async function handler(req, res) {
     const listId = isKids
       ? parseInt(process.env.BREVO_LIST_ID_KIDS || '4')
       : parseInt(process.env.BREVO_LIST_ID_TEENS || '3');
+    const welcomeTemplateId = isKids ? 2 : 1;
 
-    // Add contact to Brevo
+    // 1. Add contact to Brevo list
     const brevoRes = await fetch('https://api.brevo.com/v3/contacts', {
       method: 'POST',
       headers: {
@@ -59,13 +60,32 @@ export default async function handler(req, res) {
       }),
     });
 
-    const brevoData = await brevoRes.json().catch(() => ({}));
+    // 2. Send Welcome email immediately
+    const emailRes = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json',
+        'api-key': brevoKey,
+      },
+      body: JSON.stringify({
+        templateId: welcomeTemplateId,
+        to: [{ email, name }],
+        params: {
+          FIRSTNAME: firstName,
+          SEMINAR_SESSION: startTime,
+        },
+      }),
+    });
+
+    const emailData = await emailRes.json().catch(() => ({}));
 
     return res.status(200).json({
       success: true,
       contact: email,
       product,
       listId,
+      welcomeEmailSent: emailRes.status === 201,
       brevoStatus: brevoRes.status,
     });
   } catch (err) {
