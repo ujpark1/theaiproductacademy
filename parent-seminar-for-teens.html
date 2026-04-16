@@ -285,6 +285,41 @@
       font-weight: 500;
     }
 
+    /* ── Story Mosaic ── */
+    .story-mosaic {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 8px;
+      margin-top: 24px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .story-mosaic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .story-mosaic .mosaic-large {
+      grid-column: 1 / 2;
+      grid-row: 1 / 3;
+      aspect-ratio: 3/4;
+    }
+    .story-mosaic .mosaic-small-top {
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+      aspect-ratio: 4/3;
+    }
+    .story-mosaic .mosaic-small-bottom {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+      aspect-ratio: 4/3;
+    }
+    .story-mosaic img {
+      border-radius: 12px;
+    }
+
     /* ── Founder ── */
     .founder-card {
       display: flex;
@@ -603,6 +638,12 @@
         She built a to-do app where completing tasks earns points to unlock games. Using AI tools, she went from idea to working prototype.
       </div>
       <p>No coding bootcamp. No computer science class. Just a clear problem, a structured process, and the right AI tools. <strong>This is what's possible when teens learn to think like product builders.</strong></p>
+    </div>
+
+    <div class="story-mosaic">
+      <img src="/story-together.png" alt="Building together" class="mosaic-large">
+      <img src="/story-building.png" alt="Working on her app" class="mosaic-small-top">
+      <img src="/story-app.png" alt="The finished app" class="mosaic-small-bottom">
     </div>
   </div>
 </section>
